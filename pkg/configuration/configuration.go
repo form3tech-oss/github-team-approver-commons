@@ -45,6 +45,8 @@ type Configuration struct {
 type PullRequestApprovalRule struct {
 	// Rules is the set of rules applied to PRs targeting a specific branch.
 	Rules []Rule `yaml:"rules"`
+	// Alerts to fire when PR is merged successfully
+	Alerts []Alert `yaml:"alerts"`
 	// TargetBranch is the target branch of the PR.
 	TargetBranches []string `yaml:"target_branches"`
 }
@@ -61,6 +63,15 @@ type Rule struct {
 	Labels []string `yaml:"labels"`
 	// ForceApproval indicates whether to forcibly approve the PR regardless of the current status of reviews.
 	ForceApproval bool `yaml:"force_approval"`
+}
+
+type Alert struct {
+	// Regex is the regular expression to match each PR's body against for the alert
+	Regex string `yaml:"regex"`
+	// Slack webhook url secret - the location of the secret where the slack webhook url is stored - Slack webhooks contain sensitive data so must be hidden
+	SlackWebhookSecret string `yaml:"slack_webhook_secret"`
+	// Slack message to send to slack
+	SlackMessage string `yaml:"slack_message"`
 }
 
 // ReadConfiguration attempts to read a Configuration object from the provided Reader.
