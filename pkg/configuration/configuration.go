@@ -54,9 +54,9 @@ type PullRequestApprovalRule struct {
 // Rule is used to configure approval of PRs based on a particular regular expression.
 type Rule struct {
 	// Regex is the regular expression to match each PR's body against for the current check.
-	Regex string `yaml:"regex"`
+	Regex string `yaml:"regex,omitempty"`
 	// Directories to check for changes, leave empty to check all directories.
-	Directories []string `yaml:"directories"`
+	Directories []string `yaml:"directories,omitempty"`
 	// ApprovingTeamHandles is the list of IDs/slugs/names of the teams that must approve each matched PR.
 	ApprovingTeamHandles []string `yaml:"approving_team_handles"`
 	// ApprovalMode specifies the approval mode for PRs that match this check.
