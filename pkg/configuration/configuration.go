@@ -38,6 +38,11 @@ const (
 
 // Configuration is used to configure the approval process for PRs in a given repository.
 type Configuration struct {
+	// DisableContributorReview will enforce that an reviewer can not approve a pull request that they have contributed
+	//towards. That is, an approvers review is only considered if they have _not_ pushed a commit to the branch being merged.
+	// This does not include UI merges from the repositories main branch.
+	// Defaults to false.
+	DisableContributorReview bool
 	PullRequestApprovalRules []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
 }
 
