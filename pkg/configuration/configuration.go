@@ -38,8 +38,8 @@ const (
 
 // Configuration is used to configure the approval process for PRs in a given repository.
 type Configuration struct {
-	// IgnoreContributorApproval will enforce that an reviewer can not approve a pull request that they have contributed
-	// towards. That is, an reviewer's approval is only considered if they have _not_ pushed a commit to the branch being merged.
+	// IgnoreContributorApproval will enforce that a reviewer can not approve a pull request that they have contributed
+	// towards. That is, a reviewer's approval is only considered if they have _not_ pushed a commit to the branch being merged.
 	// This does not include UI merges from the repositories main branch.
  	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
 	// Defaults to false.
