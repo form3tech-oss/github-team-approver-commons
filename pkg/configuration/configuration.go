@@ -43,7 +43,7 @@ type Configuration struct {
 	// This does not include UI merges from the repositories main branch.
  	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
 	// Defaults to false.
-	IgnoreContributorApproval bool
+	IgnoreContributorApproval bool `yaml:"ignore_contributor_approval"`
 	PullRequestApprovalRules  []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
 }
 
