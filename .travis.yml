@@ -1,0 +1,6 @@
+if: "(type IN (push, cron) AND branch = master) OR (type = pull_request) OR (tag IS present)"
+language: go
+go:
+  - '1.17.2'
+script:
+  - GO111MODULE=off go test ./... -v
