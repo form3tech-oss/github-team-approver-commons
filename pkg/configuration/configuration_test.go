@@ -1,7 +1,7 @@
 package configuration_test
 
 import (
-    "strings"
+    "os"
     "testing"
 
     "github.com/form3tech-oss/github-team-approver-commons/pkg/configuration"
@@ -11,20 +11,13 @@ import (
 
 func Test_ReadConfiguration(t *testing.T) {
     tt := []struct {
-        name     string
-        payload  string
-        expected configuration.Configuration
+        name        string
+        payloadPath string
+        expected    configuration.Configuration
     }{
         {
-            name: "basic",
-            payload: `
-ignore_contributor_approval: false
-pull_request_approval_rules:
-    - rules:
-       - regex: "regex"
-         approving_team_handles:
-         - team-a
-         - team-b`,
+            name:        "basic",
+            payloadPath: "./testdata/configuration_basic.yaml",
             expected: configuration.Configuration{
                 IgnoreContributorApproval: false,
                 PullRequestApprovalRules: []configuration.PullRequestApprovalRule{
@@ -46,8 +39,8 @@ pull_request_approval_rules:
 
     for _, tc := range tt {
         t.Run(tc.name, func(t *testing.T) {
-            strings.NewReader(tc.payload)
-            cfg, err := configuration.ReadConfiguration(strings.NewReader(tc.payload))
+            cfgFile, err := os.Open(tc.payloadPath)
+            cfg, err := configuration.ReadConfiguration(cfgFile)
             require.NoError(t, err)
             require.NotNil(t, cfg)
             assert.Equal(t, *cfg, tc.expected)
