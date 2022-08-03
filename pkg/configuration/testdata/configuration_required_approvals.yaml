@@ -1,0 +1,8 @@
+required_approvals_per_team: 2
+ignore_contributor_approval: false
+pull_request_approval_rules:
+  - rules:
+      - regex: "regex"
+        approving_team_handles:
+          - team-a
+          - team-b
