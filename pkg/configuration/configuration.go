@@ -41,10 +41,13 @@ type Configuration struct {
 	// IgnoreContributorApproval will enforce that a reviewer can not approve a pull request that they have contributed
 	// towards. That is, a reviewer's approval is only considered if they have _not_ pushed a commit to the branch being merged.
 	// This does not include UI merges from the repositories main branch.
- 	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
+	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
 	// Defaults to false.
 	IgnoreContributorApproval bool `yaml:"ignore_contributor_approval"`
-	PullRequestApprovalRules  []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
+	// RequiredApprovalsPerTeam enforces the minimum approvals required per configured team.
+	// Defaults to 1.
+	RequiredApprovalsPerTeam int                       `yaml:"required_approvals_per_team"`
+	PullRequestApprovalRules []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
 }
 
 // PullRequestApprovalRule is used to associate a set of rules with a set of target branches.
@@ -86,7 +89,7 @@ type Alert struct {
 
 // ReadConfiguration attempts to read a Configuration object from the provided Reader.
 func ReadConfiguration(r io.Reader) (*Configuration, error) {
-	v := &Configuration{}
+	v := &Configuration{RequiredApprovalsPerTeam: 1}
 	d := yaml.NewDecoder(r)
 	if err := d.Decode(v); err != nil {
 		return nil, fmt.Errorf("error decoding configuration: %v", err)
