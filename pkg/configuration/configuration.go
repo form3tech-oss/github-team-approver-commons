@@ -38,13 +38,7 @@ const (
 
 // Configuration is used to configure the approval process for PRs in a given repository.
 type Configuration struct {
-	// IgnoreContributorApproval will enforce that a reviewer can not approve a pull request that they have contributed
-	// towards. That is, a reviewer's approval is only considered if they have _not_ pushed a commit to the branch being merged.
-	// This does not include UI merges from the repositories main branch.
- 	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
-	// Defaults to false.
-	IgnoreContributorApproval bool `yaml:"ignore_contributor_approval"`
-	PullRequestApprovalRules  []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
+	PullRequestApprovalRules []PullRequestApprovalRule `yaml:"pull_request_approval_rules"`
 }
 
 // PullRequestApprovalRule is used to associate a set of rules with a set of target branches.
@@ -73,6 +67,14 @@ type Rule struct {
 	Labels []string `yaml:"labels"`
 	// ForceApproval indicates whether to forcibly approve the PR regardless of the current status of reviews.
 	ForceApproval bool `yaml:"force_approval"`
+	// IgnoreContributorApproval will enforce that a reviewer can not approve a pull request that they have contributed
+	// towards. That is, a reviewer's approval is only considered if:
+	// - they have _not_ pushed a commit to the branch being merged,
+	// - they have _not_ co-authored a commit in the branch being merged.
+	// This does not include UI merges from the repositories main branch.
+	// See https://github.com/form3tech-oss/github-team-approver/pull/27 for more details.
+	// Defaults to false.
+	IgnoreContributorApproval bool `yaml:"ignore_contributor_approval"`
 }
 
 type Alert struct {
