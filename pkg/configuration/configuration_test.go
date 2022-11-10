@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/form3tech-oss/github-team-approver-commons/pkg/configuration"
+	"github.com/form3tech-oss/github-team-approver-commons/v2/pkg/configuration"
 	"github.com/magiconair/properties/assert"
 	"github.com/stretchr/testify/require"
 )
