@@ -1,4 +1,4 @@
-module github.com/form3tech-oss/github-team-approver-commons
+module github.com/form3tech-oss/github-team-approver-commons/v2
 
 go 1.18
 
