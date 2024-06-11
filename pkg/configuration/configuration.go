@@ -81,7 +81,7 @@ type Alert struct {
 	// Regex is the regular expression to match each PR's body against for the alert
 	Regex string `yaml:"regex"`
 	// Slack webhook url secret - the location of the secret where the slack webhook url is stored - Slack webhooks contain sensitive data so must be hidden
-	SlackWebhookSecret string `yaml:"slack_webhook_secret"`
+	SlackWebhookSecret string `yaml:"slack_webhook_secret,omitempty"`
 	// Slack message to send to slack
 	SlackMessage string `yaml:"slack_message"`
 }
